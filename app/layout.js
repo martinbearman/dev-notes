@@ -1,31 +1,28 @@
 import "./globals.css";
-import Link from "next/link";
+import Breadcrumbs from "./components/Breadcrumbs";
+import SidebarNav from "./components/SidebarNav";
+import { sideNav } from "./config/navigation";
 
 export const metadata = {
-  title: "DevLab Notes",
-  description: "Personal reference dashboard for coding concepts."
+  title: "dev-notes",
+  description: "Learning dashboard UI inspired by the provided reference design."
 };
-
-const navItems = [
-  { href: "/", label: "Dashboard" },
-  { href: "/react", label: "React" },
-  { href: "/react/hooks", label: "Hooks" }
-];
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="app-shell">
+        <div className="dashboard-shell">
+          <aside className="sidebar">
+            <div className="brand-row">
+              <div className="brand">dev-notes</div>
+            </div>
+            <SidebarNav items={sideNav} />
+  
+          </aside>
+
           <header className="topbar">
-            <div className="brand">DevLab</div>
-            <nav className="topnav">
-              {navItems.map((item) => (
-                <Link key={item.href} href={item.href}>
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+            <Breadcrumbs />
           </header>
           <main className="content">{children}</main>
         </div>
